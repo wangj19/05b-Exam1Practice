@@ -25,7 +25,7 @@ def main():
 
 
 ###############################################################################
-# TODO: 2.  READ the green doc-string for the:
+# DONE: 2.  READ the green doc-string for the:
 #   - is_prime
 #   - sum_of_digits
 # functions defined below.  You do NOT need to understand their
@@ -104,6 +104,7 @@ def run_test_problem0a():
     expected = False
     print_expected_result_of_test([83135], expected, test_results,
                                   format_string)
+
     actual = problem0a(83135)  # Run the code to test
     print_actual_result_of_test(expected, actual, test_results)
     if actual == 'False':
@@ -174,22 +175,28 @@ def run_test_problem0a():
 
 
 def problem0a(n):
-    """
-    What comes in:  An integer.
-    What goes out:
-      -- Returns True if the sum of the digits in the given integer
-         is odd, else returns False.
-    Side effects:   None.
-    Examples:
-      -- If the given integer is 83135, this function returns False,
-           since (8 + 3 + 1 + 3 + 5) is 20, which is NOT odd.
-      -- If the given integer is 306, this function returns True,
-           since (3 + 0 + 6) is 9, which IS odd.
-      -- If the given integer is 246, this function returns False,
-           since (2 + 4 + 6) is 12, which is NOT odd.
-    """
+    a = sum_of_digits(n)
+    if a % 2 == 0:
+        return False
+    elif a % 2 != 0:
+        return True
+# """
+# What comes in:  An integer.
+# What goes out:
+#   -- Returns True if the sum of the digits in the given integer
+#      is odd, else returns False.
+
+# Side effects:   None.
+    # Examples:
+    #   -- If the given integer is 83135, this function returns False,
+    #        since (8 + 3 + 1 + 3 + 5) is 20, which is NOT odd.
+    #   -- If the given integer is 306, this function returns True,
+    #        since (3 + 0 + 6) is 9, which IS odd.
+    #   -- If the given integer is 246, this function returns False,
+    #        since (2 + 4 + 6) is 12, which is NOT odd.
+    # """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ###########################################################################
@@ -246,6 +253,14 @@ def run_test_problem0b():
 
 
 def problem0b(n):
+    count = 0
+    for k in range(n-1):
+        if is_prime(k+2) is True:
+            count = count + 1
+    return count
+
+
+
     """
     What comes in:  An integer n >= 2.
     What goes out:
@@ -262,7 +277,7 @@ def problem0b(n):
            since there are 46 primes between 2 and 200.
      """
     # -------------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ###########################################################################
@@ -271,6 +286,7 @@ def problem0b(n):
     #    **  use (call) the   is_prime   function that is DEFINED ABOVE.
     ###########################################################################
     # ------------------------------------------------------------------
+
 
 
 def run_test_problem0c():
@@ -307,28 +323,39 @@ def run_test_problem0c():
 
 
 def problem0c(circle, n, window):
-    """
-    See   problem0c_picture.pdf   in this project for pictures
-    that may help you better understand the following specification:
-    
-    What comes in:
-      -- An rg.Circle.
-      -- A positive integer n.
-      -- An rg.RoseWindow.
-    What goes out:  Nothing (i.e., None).
-    Side effects:
-      Draws the given rg.Circle and n additional rg.Circles
-      on the given rg.RoseWindow such that:
-        -- The circles form a row of touching rg.Circles with the
-             leftmost circle being the given rg.Circle.
-        -- There is a 0.5 second pause after each rg.Circle is drawn.
-      Must  ** NOT close **   the window.
+    circle.attach_to(window)
+    for k in range(n):
+        y = circle.center.y
+        circle_x = circle.center.x + circle.radius * 2
+        center = rg.Point(circle_x, y)
+        circle = rg.Circle(center, circle.radius)
+        circle.attach_to(window)
+        window.render(0.5)
 
-    Type hints:
-      :type circle: rg.Circle
-      :type n: int
-      :type window: rg.RoseWindow
-    """
+
+
+# """
+    # See   problem0c_picture.pdf   in this project for pictures
+    # that may help you better understand the following specification:
+    #
+    # What comes in:
+    #   -- An rg.Circle.
+    #   -- A positive integer n.
+    #   -- An rg.RoseWindow.
+    # What goes out:  Nothing (i.e., None).
+    # Side effects:
+    #   Draws the given rg.Circle and n additional rg.Circles
+    #   on the given rg.RoseWindow such that:
+    #     -- The circles form a row of touching rg.Circles with the
+    #          leftmost circle being the given rg.Circle.
+    #     -- There is a 0.5 second pause after each rg.Circle is drawn.
+    #   Must  ** NOT close **   the window.
+    #
+    # Type hints:
+    #   :type circle: rg.Circle
+    #   :type n: int
+    #   :type window: rg.RoseWindow
+    # """
     # -------------------------------------------------------------------------
     # TODO: 5. Implement and test this function.
     #          Tests have been written for you (above).
